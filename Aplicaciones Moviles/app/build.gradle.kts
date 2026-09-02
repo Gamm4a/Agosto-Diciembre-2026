@@ -3,13 +3,13 @@ plugins {
 }
 
 android {
-    namespace = "soto.gamma.holamundo"
+    namespace = "soto.gamma.miniweather_soto"
     compileSdk {
         version = release(37)
     }
 
     defaultConfig {
-        applicationId = "soto.gamma.holamundo"
+        applicationId = "soto.gamma.miniweather_soto"
         minSdk = 27
         targetSdk = 37
         versionCode = 1
@@ -37,7 +37,6 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.core.ktx)
     implementation(libs.material)
-    implementation(libs.mediation.test.suite)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.androidx.junit)
