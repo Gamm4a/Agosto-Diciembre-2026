@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">Miniweather_Soto</string>
+    <string name="rainy">Lluvioso</string>
+    <string name="clody">Nublado</string>
+    <string name="snowy">Nevado</string>
+    <string name="stormy">Con tormenta</string>
+    <string name="sunny">Soleado</string>
+    <string name="windy">Con vientos</string>
+    <string name="next">Siguiente</string>
+
+
+
+
+
 </resources>
