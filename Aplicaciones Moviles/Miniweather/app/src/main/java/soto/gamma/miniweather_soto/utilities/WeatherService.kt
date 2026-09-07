@@ -1,7 +1,6 @@
 package soto.gamma.miniweather_soto.utilities
 
 import android.content.Context
-import android.health.connect.datatypes.WheelchairPushesRecord
 import soto.gamma.miniweather_soto.R
 import soto.gamma.miniweather_soto.domain.Weather
 
@@ -31,11 +30,16 @@ class WeatherService(private val context: Context) {
             in -15..0 ->weatherIndex=0
             in 1..18 -> weatherIndex= (1..4).random()
             in 19..25-> weatherIndex = (4..5).random()
-            else ->weatherIndex=6
+            else ->weatherIndex=5
         }
 
         return Weather(temp, weatherStates[weatherIndex])
     }
+
+    fun getWeather(city: String): Weather{
+        return generateWeather()
+    }
+
 
 
 }
