@@ -3,4 +3,9 @@
     <string name="get_in">Entrar</string>
     <string name="email">Correo Electronico</string>
     <string name="password">Contraseña</string>
+    <string name="title_movie">Cadaver de la novia</string>
+    <string name="rent">Rentar</string>
+    <string name="buy">Comprar</string>
+    <string name="sample_data">El cadáver de la novia es una película de animación stop-motion de 2005 dirigida por Tim Burton y Mike Johnson. La historia trata sobre Víctor, un joven tímido de la época victoriana que está a punto de casarse por conveniencia con Victoria</string>
+
 </resources>

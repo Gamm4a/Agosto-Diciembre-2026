@@ -11,18 +11,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyCinema">
+
+        <!-- LoginActivity será la primera pantalla -->
         <activity
-            android:name=".MainActivity"
+            android:name=".LoginActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustResize">
+
+            <!-- El intent-filter va aquí -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- MainActivity ya no tiene intent-filter -->
         <activity
-            android:name=".LoginActivity"
+            android:name=".MainActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
     </application>
