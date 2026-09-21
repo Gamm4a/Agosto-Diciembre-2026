@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Examen1_SotoGammael</string>
+    <string name="titulo">Calculadora de compatibilidad</string>
+    <string name="tu_nombre">Tu nombre</string>
+    <string name="tu_crush">El nombre de tu crush</string>
+    <string name="btn_calcular">Calcular</string>
+
+
+    <string name="ROJO">SON UNO PARA EL OTRO, BESENSEEE</string>
+    <string name="ROSA">Como que tienes oportunidad de algo...</string>
+    <string name="NARANJA">Bueeeeno... y si mejor te lo camareas?</string>
+    <string name="AZUL">Ni le muevas, vas de mal a piiior</string>
+    <string name="intentar_nuevo">Intentar de nuevo</string>
+</resources>
