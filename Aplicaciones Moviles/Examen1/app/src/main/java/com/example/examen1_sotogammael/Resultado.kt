@@ -29,14 +29,28 @@ class Resultado : AppCompatActivity() {
 
         val txtDescripcion = findViewById<TextView>(R.id.descripcion)
 
-
         val layaut= findViewById<ConstraintLayout>(R.id.main)
 
-
-        if (resultado>70){
-            layaut.setBackgroundColor(R.color.orange)
+        if (resultado>90){
+            layaut.setBackgroundColor(R.color.red)
             txtDescripcion.text =getString(R.string.ROJO)
         }
+
+        if (resultado>75 && resultado<89){
+            layaut.setBackgroundColor(R.color.pink)
+            txtDescripcion.text =getString(R.string.ROSA)
+        }
+
+        if (resultado>60 && resultado<74){
+            layaut.setBackgroundColor(R.color.orange)
+            txtDescripcion.text =getString(R.string.NARANJA)
+        }
+
+        if (resultado<59){
+            layaut.setBackgroundColor(R.color.blue)
+            txtDescripcion.text =getString(R.string.AZUL)
+        }
+
 
 
         //----- el psh boton
