@@ -1,0 +1,15 @@
+modelo\Contador.class
+com\mycompany\separadornombres\SeparadorNombres.class
+vista\VistaIntentos.class
+modelo\IOperacionesModelo.class
+modelo\Resultado.class
+vista\VistaEstadisticas.class
+utilerias\Observador.class
+vista\VistaNombres.class
+modelo\IConsultaModelo.class
+modelo\ControlNombres.class
+modelo\Persona.class
+utilerias\SujetoObservado.class
+controlador\Controlador.class
+ensamblador\Ensamblador.class
+modelo\FachadaModeloNombres.class
