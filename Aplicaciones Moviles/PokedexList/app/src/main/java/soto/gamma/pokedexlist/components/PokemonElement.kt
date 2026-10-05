@@ -24,14 +24,11 @@ import soto.gamma.pokedexlist.ui.theme.Green
 
 @Composable
 fun PokemonRow(pokemon: Pokemon) {
-
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(10.dp),
-        horizontalArrangement = Arrangement.SpaceBetween
+            .padding(10.dp)
     ) {
-
         Image(
             painter = painterResource(id = pokemon.image),
             contentDescription = "${pokemon.name} image",
@@ -44,7 +41,6 @@ fun PokemonRow(pokemon: Pokemon) {
             modifier = Modifier.fillMaxWidth(0.7f),
             verticalArrangement = Arrangement.spacedBy(2.dp)
         ) {
-
             Text(
                 text = pokemon.name,
                 style = MaterialTheme.typography.labelLarge
@@ -59,21 +55,20 @@ fun PokemonRow(pokemon: Pokemon) {
                 modifier = Modifier.fillMaxWidth(0.85f),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-
                 Text(
-                    text = "Height: ${pokemon.height}",
+                    text = pokemon.height.toString(),
                     style = MaterialTheme.typography.labelMedium
                 )
 
                 Text(
-                    text = "Weight: ${pokemon.weight}",
+                    text = pokemon.weight.toString(),
                     style = MaterialTheme.typography.labelMedium
                 )
             }
         }
 
         Text(
-            text = "${pokemon.number}",
+            text = pokemon.number.toString(),
             modifier = Modifier
                 .align(Alignment.Top)
                 .background(
