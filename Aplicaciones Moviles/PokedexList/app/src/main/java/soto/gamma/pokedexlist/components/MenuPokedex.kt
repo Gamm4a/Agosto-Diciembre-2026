@@ -12,8 +12,7 @@ import soto.gamma.pokedexlist.domain.Pokemon
 @Composable
 fun MenuPokedex(pokemonList: List<Pokemon>, innerPadding: PaddingValues){
     LazyColumn(){
-        items(pokemonList){
-            pokemon->
+        items(pokemonList){ pokemon->
             PokemonRow(pokemon)
         }
     }
