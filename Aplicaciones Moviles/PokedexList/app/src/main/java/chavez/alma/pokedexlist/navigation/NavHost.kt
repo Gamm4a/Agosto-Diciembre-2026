@@ -9,6 +9,7 @@ import androidx.navigation.toRoute
 import chavez.alma.pokedexlist.model.data.getPokemonByNumber
 import chavez.alma.pokedexlist.view.screens.MenuPokedexScreen
 import chavez.alma.pokedexlist.view.screens.PokemonDetailScreen
+import chavez.alma.pokedexlist.view.screens.PokemonHuntScreen
 
 @Composable
 fun MyApp(innerPadding: PaddingValues) {
@@ -19,7 +20,8 @@ fun MyApp(innerPadding: PaddingValues) {
                  innerPadding = innerPadding,
                 onNavigateToDetail = { id ->
                     navController.navigate(route = PokemonDetail(id))
-                }
+                },
+                onNavigateToHunt = {navController.navigate(route = PokemonHunt)}
             )
         }
         composable<PokemonDetail> { backStackEntry ->
@@ -27,5 +29,10 @@ fun MyApp(innerPadding: PaddingValues) {
             val pokemon = getPokemonByNumber(detail.pokemon)
             PokemonDetailScreen(innerPadding = innerPadding, pokemon = pokemon)
         }
+
+        composable<PokemonHunt>{
+            PokemonHuntScreen(innerPadding)
+        }
+
     }
 }
