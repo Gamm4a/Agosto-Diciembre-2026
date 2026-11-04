@@ -12,7 +12,7 @@ class CheezeryViewModel : ViewModel() {
 
     val products = listOf(
 
-        // HOT DRINKS
+        // bevidas calientes
         Product(
             "Americano",
             65.0,
