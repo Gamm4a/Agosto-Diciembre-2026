@@ -1,6 +1,7 @@
 package chavez.alma.pokedexlist.view.screens
 
 import android.graphics.Paint
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
@@ -14,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.R
 import androidx.lifecycle.viewmodel.compose.viewModel
 import chavez.alma.pokedexlist.model.data.UserViewModel
 import chavez.alma.pokedexlist.ui.theme.Pink40
@@ -33,6 +35,8 @@ fun ProfileScreen(
     }
     */
     val mail= "Gamma@mail.com"
+
+    val image= R.drawable.
 
     /*
     if (userViewModel.currentUser != null) {
@@ -54,6 +58,9 @@ fun ProfileScreen(
 
         Spacer(Modifier.size(50.dp))
         Text("Mi compañero", style = Typography.titleLarge)
+
+        Image()
+
     }
 
 
