@@ -6,6 +6,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
+import soto.gamma.thecheezery.screen.CartScreen
+import soto.gamma.thecheezery.screen.LoginScreen
+import soto.gamma.thecheezery.screen.MenuScreen
+import soto.gamma.thecheezery.screen.ShowProductsScreen
 import soto.gamma.thecheezery.screen.WelcomeScreen
 import soto.gamma.thecheezery.viewmodel.CheezeryViewModel
 
@@ -77,7 +81,7 @@ fun MyApp(
 
         composable<Cart> {
 
-            Cart(
+            CartScreen(
                 innerPadding = innerPadding,
                 viewModel = viewModel
             )
