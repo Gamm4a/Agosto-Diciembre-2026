@@ -3,11 +3,10 @@ package chavez.alma.pokedexlist.navigation
 import kotlinx.serialization.Serializable
 
 @Serializable
-object PokemonList
+object Login
 
 @Serializable
-object  login
-
+object PokemonList
 
 @Serializable
 data class PokemonDetail(val pokemon: Int)

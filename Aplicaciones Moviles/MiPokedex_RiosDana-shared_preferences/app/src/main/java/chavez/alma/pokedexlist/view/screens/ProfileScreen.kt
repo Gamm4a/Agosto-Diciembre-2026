@@ -8,6 +8,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -27,8 +29,9 @@ fun ProfileScreen(
     val nombre = user?.name ?: "Nombre Usuario"
     val mail = user?.email ?: "usuario@mail.com"
 
-    val image = if (user != null) userViewModel.companion.image else "No selected"
-    val pokemonName = if (user != null) userViewModel.companion.name else "No Selected"
+    val companionPokemon by userViewModel.companion.collectAsState()
+    val image = if (user != null) companionPokemon.image else "No selected"
+    val pokemonName = if (user != null) companionPokemon.name else "No Selected"
 
     Column(
         Modifier
@@ -45,7 +48,7 @@ fun ProfileScreen(
         )
 
         Spacer(Modifier.size(50.dp))
-        Text("Mi compañero", style = Typography.titleLarge)
+        Text("Mi compañero: $pokemonName", style = Typography.titleLarge)
     }
 }
 

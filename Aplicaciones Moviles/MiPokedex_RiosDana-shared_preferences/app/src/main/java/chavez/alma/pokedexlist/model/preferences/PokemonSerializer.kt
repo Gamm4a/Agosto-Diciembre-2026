@@ -1,5 +1,6 @@
 package chavez.alma.pokedexlist.model.preferences
 
+import androidx.datastore.core.CorruptionException
 import androidx.datastore.core.Serializer
 import chavez.alma.pokedexlist.model.domain.Pokemon
 import kotlinx.serialization.SerializationException
@@ -25,17 +26,21 @@ object PokemonSerializer : Serializer<Pokemon> {
     override suspend fun readFrom(input: InputStream): Pokemon {
         return try {
             Json.decodeFromString(
-                Pokemon.serializer(), input
+                Pokemon.serializer(),
+                input.readBytes().decodeToString()
             )
         } catch (e: SerializationException) {
-            e.printStackTrace()
-            defaultValue
+            throw CorruptionException("No se pudo leer el Json", e)
         }
     }
 
-    override suspend fun writeTo(t: Pokemon, output: OutputStream) {
+    override suspend fun writeTo(
+        t: Pokemon,
+        output: OutputStream
+    ) {
         output.write(
-            Json.encodeToString(t).encodeToByteArray()
+            Json.encodeToString(Pokemon.serializer(), t)
+                .encodeToByteArray()
         )
     }
 }

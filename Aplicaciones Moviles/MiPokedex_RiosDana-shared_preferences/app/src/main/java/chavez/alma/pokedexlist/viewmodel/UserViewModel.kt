@@ -4,12 +4,22 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import chavez.alma.pokedexlist.model.data.CompanionPrefecences
 import chavez.alma.pokedexlist.model.data.bulbasaur
 import chavez.alma.pokedexlist.model.domain.Pokemon
+import chavez.alma.pokedexlist.model.preferences.PokemonSerializer
 import com.tu_paquete.pokedexlist.model.data.User
 import com.tu_paquete.pokedexlist.model.data.Users
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.WhileSubscribed
+import kotlinx.coroutines.flow.stateIn
 
-class UserViewModel(val users: Users) : ViewModel() {
+class UserViewModel(
+    val users: Users,
+    private val companitionDataStore: CompanionPrefecences
+) : ViewModel() {
 
     var currentUser by mutableStateOf<User?>(null)
         private set
@@ -20,7 +30,12 @@ class UserViewModel(val users: Users) : ViewModel() {
     var errorDescription by mutableStateOf("")
         private set
 
-    var companion by mutableStateOf<Pokemon>(bulbasaur)
+    val companion: StateFlow<Pokemon> = companitionDataStore.pokemonCompanion()
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5000),
+            initialValue = PokemonSerializer.defaultValue
+        )
 
     init {
         currentUser = users.getCurrentUser()
