@@ -9,11 +9,14 @@ import kotlinx.coroutines.launch
 
 class PokemonDetailViewModel(
     private val companitionDataStore: CompanionPrefecences
-){
+): ViewModel(){
+
     fun saveCompanion(pokemon: Pokemon){
-        viewModelScope.launch
-        {
+        viewModelScope.launch {
             companitionDataStore.saveCompanion(pokemon)
         }
+
     }
+
+
 }

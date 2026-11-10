@@ -11,6 +11,7 @@ import androidx.compose.ui.platform.LocalContext
 import chavez.alma.pokedexlist.model.data.CompanionPrefecences
 import chavez.alma.pokedexlist.navigation.MyApp
 import chavez.alma.pokedexlist.ui.theme.PokedexListTheme
+import chavez.alma.pokedexlist.viewmodel.PokemonDetailViewModel
 import com.tu_paquete.pokedexlist.model.data.Users
 import com.tu_paquete.pokedexlist.viewmodel.UserViewModel
 
@@ -23,11 +24,13 @@ class MainActivity : ComponentActivity() {
                 val users = remember { Users(context) }
                 val companionPreferences = remember { CompanionPrefecences(context) }
                 val userViewModel = remember { UserViewModel(users, companionPreferences) }
+                val pokemonDetailViewModel = remember { PokemonDetailViewModel(companionPreferences) }
 
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     MyApp(
                         innerPadding = innerPadding,
-                        userViewModel = userViewModel
+                        userViewModel = userViewModel,
+                        pokemonDetailViewModel = pokemonDetailViewModel
                     )
                 }
             }

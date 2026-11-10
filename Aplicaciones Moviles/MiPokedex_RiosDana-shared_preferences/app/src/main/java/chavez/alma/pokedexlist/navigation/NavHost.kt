@@ -10,13 +10,16 @@ import chavez.alma.pokedexlist.model.data.getPokemonByNumber
 import chavez.alma.pokedexlist.view.screens.MenuPokedexScreen
 import chavez.alma.pokedexlist.view.screens.PokemonDetailScreen
 import chavez.alma.pokedexlist.view.screens.PokemonHuntScreen
+import chavez.alma.pokedexlist.view.screens.ProfileScreen
+import chavez.alma.pokedexlist.viewmodel.PokemonDetailViewModel
 import com.tu_paquete.pokedexlist.ui.LoginScreen
 import com.tu_paquete.pokedexlist.viewmodel.UserViewModel
 
 @Composable
 fun MyApp(
     innerPadding: PaddingValues,
-    userViewModel: UserViewModel
+    userViewModel: UserViewModel,
+    pokemonDetailViewModel: PokemonDetailViewModel
 ) {
     val navController = rememberNavController()
 
@@ -44,6 +47,9 @@ fun MyApp(
                 },
                 onNavigateToHunt = {
                     navController.navigate(route = PokemonHunt)
+                },
+                onNavigateToProfile = {
+                    navController.navigate(route = Profile)
                 }
             )
         }
@@ -51,11 +57,22 @@ fun MyApp(
         composable<PokemonDetail> { backStackEntry ->
             val detail: PokemonDetail = backStackEntry.toRoute()
             val pokemon = getPokemonByNumber(detail.pokemon)
-            PokemonDetailScreen(innerPadding = innerPadding, pokemon = pokemon)
+            PokemonDetailScreen(
+                innerPadding = innerPadding,
+                pokemon = pokemon,
+                pokemonDetailViewModel = pokemonDetailViewModel
+            )
         }
 
         composable<PokemonHunt> {
             PokemonHuntScreen(innerPadding)
+        }
+
+        composable<Profile> {
+            ProfileScreen(
+                innerPadding = innerPadding,
+                userViewModel = userViewModel
+            )
         }
     }
 }
