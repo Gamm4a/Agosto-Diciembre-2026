@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper
 class DatabaseHelper(context: Context) :
     SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
-    companion object {
+    companion object Contract {
         const val DATABASE_NAME = "pokedex.db"
         const val DATABASE_VERSION = 1
         const val TABLE_POKEMONS = "Pokemons"
@@ -43,7 +43,36 @@ class DatabaseHelper(context: Context) :
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
-        db.execSQL("DROP TABLE IF EXISTS $TABLE_POKEMONS")
+        //db.execSQL("DROP TABLE IF EXISTS $TABLE_POKEMONS")
+
+        if (oldVersion<2){
+            val addColumnAbility = "ALTER TABLE ${Contract.TABLE_POKEMONS} "+
+                    "ADD COLUMN ${Contract.COLUMN_NAME_ABILITY} TEXT"
+
+            val addColumnFavorite = "ALTER TABLE  ${Contract.TABLE_POKEMONS} "+
+                    "ADD COLUMN ${Contract.COLUMN_NAME_FAVORITE} BOOLEAN"
+
+            val addColumnHeight = "ALTER TABLE  ${Contract.TABLE_POKEMONS} "+
+                    "ADD COLUMN ${Contract.COLUMN_NAME_HEIGHT} REAL"
+
+            val addColumnWeight = "ALTER TABLE  ${Contract.TABLE_POKEMONS} "+
+                    "ADD COLUMN ${Contract.COLUMN_NAME_WEIGHT} REAL"
+
+            val addColumnImage = "ALTER TABLE  ${Contract.TABLE_POKEMONS} "+
+                    "ADD COLUMN ${Contract.COLUMN_NAME_ABILITY} BLOB"
+
+            db?.beginTransaction()
+            db?.execSQL(addColumnAbility)
+            db?.execSQL(addColumnFavorite)
+            db?.execSQL(addColumnHeight)
+            db?.execSQL(addColumnWeight)
+            db?.execSQL(addColumnImage)
+            db?.setTransactionSuccessful()
+            db?.endTransaction()
+
+
+
+        }
         onCreate(db)
     }
 }

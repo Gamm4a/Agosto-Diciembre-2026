@@ -47,28 +47,24 @@ fun AddPokemonScreen(
             value = name,
             onValueChange = { name = it },
             label = { Text("Nombre") },
-            modifier = Modifier.fillMaxWidth()
         )
         Spacer(Modifier.size(8.dp))
         TextField(
             value = number,
             onValueChange = { number = it },
             label = { Text("Numero") },
-            modifier = Modifier.fillMaxWidth()
         )
         Spacer(Modifier.size(8.dp))
         TextField(
             value = type,
             onValueChange = { type = it },
             label = { Text("Tipo") },
-            modifier = Modifier.fillMaxWidth()
         )
         Spacer(Modifier.size(8.dp))
         TextField(
             value = description,
             onValueChange = { description = it },
             label = { Text("Descripcion") },
-            modifier = Modifier.fillMaxWidth()
         )
         Spacer(Modifier.size(8.dp))
         Button(
