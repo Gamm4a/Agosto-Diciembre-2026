@@ -29,7 +29,8 @@ fun MenuPokedexScreen(
     innerPadding: PaddingValues,
     onNavigateToDetail: (id: Int) -> Unit = {},
     onNavigateToHunt: () -> Unit = {},
-    onNavigateToProfile: () -> Unit = {}
+    onNavigateToProfile: () -> Unit = {},
+    onNavigateToAddPokemon: () -> Unit = {}
 ) {
     Column(modifier = Modifier.padding(innerPadding)) {
         Row(
@@ -39,6 +40,9 @@ fun MenuPokedexScreen(
         ) {
             Text("Favorite Pokemons")
             Row(verticalAlignment = Alignment.CenterVertically) {
+                Button(onClick = { onNavigateToAddPokemon() }) {
+                    Text("Agregar")
+                }
                 Button(onClick = { onNavigateToHunt() }) {
                     Text("Catch New")
                 }

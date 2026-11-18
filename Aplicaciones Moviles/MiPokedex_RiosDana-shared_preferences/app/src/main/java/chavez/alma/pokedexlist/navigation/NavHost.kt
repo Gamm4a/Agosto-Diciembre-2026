@@ -11,7 +11,9 @@ import chavez.alma.pokedexlist.view.screens.MenuPokedexScreen
 import chavez.alma.pokedexlist.view.screens.PokemonDetailScreen
 import chavez.alma.pokedexlist.view.screens.PokemonHuntScreen
 import chavez.alma.pokedexlist.view.screens.ProfileScreen
+import chavez.alma.pokedexlist.view.screens.AddPokemonScreen
 import chavez.alma.pokedexlist.viewmodel.PokemonDetailViewModel
+import chavez.alma.pokedexlist.viewmodel.AddPokemonViewModel
 import com.tu_paquete.pokedexlist.ui.LoginScreen
 import com.tu_paquete.pokedexlist.viewmodel.UserViewModel
 
@@ -19,7 +21,8 @@ import com.tu_paquete.pokedexlist.viewmodel.UserViewModel
 fun MyApp(
     innerPadding: PaddingValues,
     userViewModel: UserViewModel,
-    pokemonDetailViewModel: PokemonDetailViewModel
+    pokemonDetailViewModel: PokemonDetailViewModel,
+    addPokemonViewModel: AddPokemonViewModel
 ) {
     val navController = rememberNavController()
 
@@ -50,6 +53,9 @@ fun MyApp(
                 },
                 onNavigateToProfile = {
                     navController.navigate(route = Profile)
+                },
+                onNavigateToAddPokemon = {
+                    navController.navigate(route = AddPokemon)
                 }
             )
         }
@@ -72,6 +78,13 @@ fun MyApp(
             ProfileScreen(
                 innerPadding = innerPadding,
                 userViewModel = userViewModel
+            )
+        }
+
+        composable<AddPokemon> {
+            AddPokemonScreen(
+                innerPadding = innerPadding,
+                viewModel = addPokemonViewModel
             )
         }
     }

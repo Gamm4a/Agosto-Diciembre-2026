@@ -16,3 +16,6 @@ object PokemonHunt
 
 @Serializable
 object Profile
+
+@Serializable
+object AddPokemon
