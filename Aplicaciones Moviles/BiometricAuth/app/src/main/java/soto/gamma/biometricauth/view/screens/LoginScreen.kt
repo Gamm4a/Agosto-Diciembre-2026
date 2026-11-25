@@ -1,6 +1,7 @@
 package soto.gamma.biometricauth.view.screens
 
 import androidx.biometric.BiometricManager
+import androidx.biometric.BiometricPrompt
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -21,8 +22,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.viewmodel.compose.viewModel
 import soto.gamma.biometricauth.viewmodel.LoginViewModel
+import java.util.concurrent.Executor
 
 @Composable
 fun LoginScreen(
@@ -60,12 +64,47 @@ fun LoginScreen(
 
             BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED -> {
                 loginViewModel.authStatus =
-                    "no hay datos biométricos disponibles en el dispositivo. Ve a configuraciones"
+                    "no hay datos biométricos disponibles en el dispositivo. Ve a configuracion para registrarlos"
                 isBiometricAvailable = false
             }
 
         }
     }
+
+    val activity = context as FragmentActivity
+    val executor: Executor = ContextCompat.getMainExecutor(context)
+    val biometricPrompt = remember {
+        BiometricPrompt(
+            activity, executor, object : BiometricPrompt.AuthenticationCallback() {
+                override fun onAuthenticationError(
+                    errorCode: Int,
+                    errString: CharSequence
+                ) {
+                    loginViewModel.authStatus = "Error: ${errString}"
+                }
+
+                override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
+                    super.onAuthenticationSucceeded(result)
+                }
+
+                override fun onAuthenticationFailed() {
+                    loginViewModel.authStatus = "Fallo en las credenciales, intenta de nuevo"
+                }
+
+            }
+
+        )
+    }
+    val promptInfo= remember{
+        BiometricPrompt.PromptInfo.Builder()
+            .setTitle("Autenticación Biométrica")
+            .setSubtitle("Usa tu huella o reconocimiento facil")
+            .setDescription("Coloca tu dedo en el sensor o mira a la camara sin lentes oscuros")
+            .setNegativeButtonText("Cancelar")
+            .build()
+    }
+
+
 
 
 
@@ -81,17 +120,26 @@ fun LoginScreen(
             password, label = { Text("Contraseña") },
             textObfuscationMode = TextObfuscationMode.RevealLastTyped
         )
+
+        Button({
+            loginViewModel.login(
+                user.text.toString(),
+                password.text.toString(),
+                onSuccessfulLogin
+            )
+        }) {
+            Text("Iniciar sesión")
+        }
+
+
+        Button({biometricPrompt.authenticate(promptInfo)}, enabled = isBiometricAvailable) {
+            
+        }
+
+
+
     }
 
-    Button({
-        loginViewModel.login(
-            user.text.toString(),
-            password.text.toString(),
-            onSuccessfulLogin
-        )
-    }) {
-        Text("Iniciar sesión")
-    }
 
 
 }
