@@ -133,7 +133,7 @@ fun LoginScreen(
 
 
         Button({biometricPrompt.authenticate(promptInfo)}, enabled = isBiometricAvailable) {
-            
+
         }
 
 
