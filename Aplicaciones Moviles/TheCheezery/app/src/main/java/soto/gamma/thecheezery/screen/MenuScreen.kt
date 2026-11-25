@@ -29,7 +29,8 @@ import soto.gamma.thecheezery.ui.theme.Very_purple
 fun MenuScreen(
     innerPadding: PaddingValues,
     onCategoryClick: (String) -> Unit,
-    onCartClick: () -> Unit
+    onCartClick: () -> Unit,
+    onCombosClick: () -> Unit
 ) {
 
     Column(
@@ -48,6 +49,18 @@ fun MenuScreen(
         )
 
         Spacer(modifier = Modifier.height(30.dp))
+
+        Button(
+            onClick = onCombosClick,
+            modifier = Modifier.fillMaxWidth(),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Very_purple
+            )
+        ) {
+            Text("Create Combo")
+        }
+
+        Spacer(modifier = Modifier.height(12.dp))
 
         Button(
             onClick = {

@@ -7,6 +7,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import soto.gamma.thecheezery.screen.CartScreen
+import soto.gamma.thecheezery.screen.AddComboScreen
 import soto.gamma.thecheezery.screen.LoginScreen
 import soto.gamma.thecheezery.screen.MenuScreen
 import soto.gamma.thecheezery.screen.ShowProductsScreen
@@ -60,6 +61,9 @@ fun MyApp(
 
                 onCartClick = {
                     navController.navigate(Cart)
+                },
+                onCombosClick = {
+                    navController.navigate(Combos)
                 }
             )
         }
@@ -82,6 +86,13 @@ fun MyApp(
         composable<Cart> {
 
             CartScreen(
+                innerPadding = innerPadding,
+                viewModel = viewModel
+            )
+        }
+
+        composable<Combos> {
+            AddComboScreen(
                 innerPadding = innerPadding,
                 viewModel = viewModel
             )

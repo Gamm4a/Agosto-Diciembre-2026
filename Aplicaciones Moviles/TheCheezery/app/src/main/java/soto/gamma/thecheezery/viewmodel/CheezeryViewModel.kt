@@ -1,16 +1,31 @@
 package soto.gamma.thecheezery.viewmodel
 
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.viewModelScope
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import kotlinx.coroutines.launch
 import soto.gamma.thecheezery.R
+import soto.gamma.thecheezery.model.Combo
 import soto.gamma.thecheezery.model.Product
 import soto.gamma.thecheezery.model.ProductCategory
+import soto.gamma.thecheezery.model.data.database.AppDatabase
+import soto.gamma.thecheezery.model.data.database.entity.ProductEntity
+import soto.gamma.thecheezery.model.data.repository.CheezeryRepository
 
-class CheezeryViewModel : ViewModel() {
+class CheezeryViewModel(application: Application) : AndroidViewModel(application) {
 
-    val products = listOf(
+    private val repository: CheezeryRepository
+
+    var products by mutableStateOf(listOf<Product>())
+        private set
+
+    var combos by mutableStateOf(listOf<Combo>())
+        private set
+
+    private val sampleProducts = listOf(
 
         // bevidas calientes
         Product(
@@ -165,6 +180,31 @@ class CheezeryViewModel : ViewModel() {
         )
     )
 
+    init {
+        val database = AppDatabase.getInstance(application)
+        repository = CheezeryRepository(
+            database.productDao(),
+            database.comboDao()
+        )
+
+        viewModelScope.launch {
+            if (repository.getAllProducts().isEmpty()) {
+                repository.insertProducts(
+                    sampleProducts.map { product ->
+                        ProductEntity(
+                            name = product.name,
+                            price = product.price.toFloat(),
+                            imageRes = product.imageRes,
+                            category = product.category.name
+                        )
+                    }
+                )
+            }
+            loadProducts()
+            loadCombos()
+        }
+    }
+
     var cartProducts by mutableStateOf(listOf<Product>())
         private set
 
@@ -174,6 +214,37 @@ class CheezeryViewModel : ViewModel() {
 
     fun removeFromCart(product: Product) {
         cartProducts = cartProducts - product
+    }
+
+    private fun toProduct(entity: ProductEntity): Product =
+        Product(
+            name = entity.name,
+            price = entity.price.toDouble(),
+            imageRes = entity.imageRes,
+            category = ProductCategory.valueOf(entity.category),
+            id = entity.id
+        )
+
+    private suspend fun loadProducts() {
+        products = repository.getAllProducts().map(::toProduct)
+    }
+
+    private suspend fun loadCombos() {
+        combos = repository.getAllCombos().map { relation ->
+            Combo(
+                id = relation.combo.id,
+                name = relation.combo.name,
+                price = relation.combo.price.toDouble(),
+                products = relation.products.map(::toProduct)
+            )
+        }
+    }
+
+    fun createCombo(name: String, price: Double, productIds: List<Int>) {
+        viewModelScope.launch {
+            repository.insertCombo(name, price.toFloat(), productIds)
+            loadCombos()
+        }
     }
 
     fun getProductsByCategory(

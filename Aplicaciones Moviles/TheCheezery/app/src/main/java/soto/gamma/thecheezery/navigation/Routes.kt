@@ -15,6 +15,9 @@ object Menu
 object Cart
 
 @Serializable
+object Combos
+
+@Serializable
 data class Products(
     val category: String
 )
