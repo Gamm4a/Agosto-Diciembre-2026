@@ -15,10 +15,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import soto.gamma.biometricauth.viewmodel.LoginViewModel
 
 @Composable
-fun LoginScreen(innerPadding: PaddingValues, onSuccessfulLogin: ()->Unit, loginViewModel: LoginViewModel){
+fun LoginScreen(innerPadding: PaddingValues, onSuccessfulLogin: ()->Unit, loginViewModel: LoginViewModel= viewModel()){
 
     var user = remember{TextFieldState()}
     var password = remember { TextFieldState() }
