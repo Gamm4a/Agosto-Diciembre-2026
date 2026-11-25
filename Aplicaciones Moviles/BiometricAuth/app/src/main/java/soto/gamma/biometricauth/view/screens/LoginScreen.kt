@@ -19,24 +19,37 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import soto.gamma.biometricauth.viewmodel.LoginViewModel
 
 @Composable
-fun LoginScreen(innerPadding: PaddingValues, onSuccessfulLogin: ()->Unit, loginViewModel: LoginViewModel= viewModel()){
+fun LoginScreen(
+    innerPadding: PaddingValues,
+    onSuccessfulLogin: () -> Unit,
+    loginViewModel: LoginViewModel = viewModel()
+) {
 
-    var user = remember{TextFieldState()}
+    var user = remember { TextFieldState() }
     var password = remember { TextFieldState() }
 
 
     Column(
-        Modifier.fillMaxSize()
-        .padding(innerPadding)
-        .padding(15.dp),
+        Modifier
+            .fillMaxSize()
+            .padding(innerPadding)
+            .padding(15.dp),
         verticalArrangement = Arrangement.spacedBy(20.dp)
     ) {
-        TextField(user, label={Text("Correo Electronico") })
-        SecureTextField(password, label = {Text("Contraseña")},
-        textObfuscationMode = TextObfuscationMode.RevealLastTyped)
+        TextField(user, label = { Text("Correo Electronico") })
+        SecureTextField(
+            password, label = { Text("Contraseña") },
+            textObfuscationMode = TextObfuscationMode.RevealLastTyped
+        )
     }
 
-    Button({onSuccessfulLogin()}){
+    Button({
+        loginViewModel.login(
+            user.text.toString(),
+            password.text.toString(),
+            onSuccessfulLogin
+        )
+    }) {
         Text("Iniciar sesión")
     }
 
