@@ -9,22 +9,20 @@ import soto.gamma.biometricauth.view.screens.HomeScreen
 import soto.gamma.biometricauth.view.screens.LoginScreen
 
 @Composable
-fun BiometricNavegation(innerPadding: PaddingValues){
+fun BiometricNavegation(innerPadding: PaddingValues) {
     val navController = rememberNavController()
 
-    NavHost(navController, startDestination= Login){
+    NavHost(navController, startDestination = Login) {
         composable<Login> {
-            LoginScreen(innerPadding,{navController.navigate(Home)} )
+            LoginScreen(innerPadding, { navController.navigate(Home) })
         }
 
-        composable <Home>{
-            HomeScreen(innerPadding, onExit = {navController.navigate(Login)})
+        composable<Home> {
+            HomeScreen(innerPadding, onExit = { navController.navigate(Login) })
         }
 
 
     }
-
-
 
 
 }
